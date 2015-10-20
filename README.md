@@ -1,7 +1,7 @@
-# TANGRAM flows examples
+# TANGRAM flows provisioning
 
 
-This repository contains some flows examples to start interacting with TANGRAM. **The purpose of these examples are to understand the basic principles of how TANGRAM works.**
+This repository contains some provisioning flows examples to start interacting with TANGRAM. **The purpose of these examples are to understand the basic principles of how TANGRAM works.**
 
 The source tree includes Batch Windows sources and Unix Bash scripts, which sends XML files to TANGRAM
 and prints the response. Using those scripts, you can see the raw requests and responses data, making **easier to debug the flow without programming anything.**
@@ -12,10 +12,10 @@ and prints the response. Using those scripts, you can see the raw requests and r
 ## Prerequisites 
 
 You can find the **base scripts** to send data to TANGRAM in the scripts folder for both Windows and Unix Bash:
->[tangram-flows-examples/scripts/unix/send_request.sh](https://github.com/takenet/tangram-flows-examples/blob/master/scripts/unix/send_request.sh)
+>[tangram-flows-provisioning/scripts/unix/send_request.sh](https://github.com/takenet/tangram-flows-provisioning/blob/master/scripts/unix/send_request.sh)
 >
->[tangram-flows-examples/scripts/windows/send_request.cmd
-](https://github.com/takenet/tangram-flows-examples/blob/master/scripts/windows/send_request.cmd)
+>[tangram-flows-provisioning/scripts/windows/send_request.cmd
+](https://github.com/takenet/tangram-flows-provisioning/blob/master/scripts/windows/send_request.cmd)
 
 **The flow examples, however, are all implemented using Shell script**. Therefore, to run those scripts on a Windows environment, you need to install MSYS. 
 
@@ -98,7 +98,7 @@ If you like to modify some behavior of the tangram-notifier-listener, you can ge
 
 ### Download Flow examples
 
-Download the examples [here](https://github.com/takenet/tangram-flows-examples/archive/master.zip) and then extract the files (say to d:/). 
+Download the examples [here](https://github.com/takenet/tangram-flows-provisioning/archive/master.zip) and then extract the files (say to d:/). 
 
 ### Edit the configuration file
 
@@ -108,6 +108,7 @@ The configuration file contains a set of variables in a properties file format:
 NAME_OF_VARIABLE=VALUE_OF_VARIABLE
 ```
 
+The configuration filename is **tangram.properties** and is located along with the scripts.
 Fill those variables with the proper values. Some of those variables are provided by Takenet and others don't, but all of them have comments on top explaining the meaning of each one.
 
 ### Execute the flow sample script
@@ -115,7 +116,7 @@ Fill those variables with the proper values. Some of those variables are provide
 To execute the scripts go the path in which the files were extracted.
 
 ```
-cd /d/tangram-flows-examples-master/
+$ cd /d/tangram-flows-examples-master/
 ```
 
 > **MSYS2 note (Windows users)**:
@@ -131,16 +132,16 @@ cd /d/tangram-flows-examples-master/
 #### Provisioning example
 
 ```
-cd /d/tangram-flows-examples-master/provisioning/subscribre_channel
+$ cd /d/tangram-flows-examples-master/provisioning/subscribre_channel
 ```
 
 Using **ls** to list the directory, you will see the Bash files containing one example for subscribe and one for unsubscribe. These scripts uses the templates files (inside templates folder) and the properties file to generate the requests.
 
 ```
-ls
+$ ls
 provisioning_subscribe_channel2.sh
 provisioning_unsubscribe_channel2.sh
-tangram.properties.txt
+tangram.properties
 templates
 ```
 
@@ -149,8 +150,81 @@ Then, edit the file **tangram.properties.txt** and fill the properties values wi
 To execute the subscribe channel exemple, do as follow:
 
 ```
-sh provisioning_subscribe_channel2.sh
+$ sh provisioning_subscribe_channel2.sh
 ```
+
+The script creates the XML string to send the request, presents the request to user, and waits until the user hit ENTER.
+
+```
+-------------------------------------------------------------------------------
+20/10/2015 15:37:13 -0200
+
+SUBSCRIBE REQUEST:
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tangram_request company_id="0" service_id="0">
+    <provisioning>
+        <channel_id>2</channel_id>
+        <carrier_id>0</carrier_id>
+        <operation code="5">Subscribe channel</operation>
+        <source>9999</source>
+        <destination>5531987654321</destination>
+        <request_datetime>2010151537</request_datetime>
+        <authentication type="0"/>
+        <notification type="208" calltype="1">http://NOTIFICATION_ADDRESS:8181</notification>
+    </provisioning>
+</tangram_request>
+
+-------------------------------------------------------------------------------
+20/10/2015 15:37:13 -0200
+
+Type [ENTER] to send.
+```
+
+Next, the script calls cURL to send the request and prints the response.
+The scripts waits until the user hit ENTER to send the request to simulate the user MO.
+
+```
+SEND THE REQUEST TO TANGRAM AND PRINTS THE RESPONSE:
+
+<?xml version="1.0"?>
+<tangram_response company_id="0" service_id="0">
+  <provisioning code="0">
+    <description code="0">Request received</description>
+    <response_datetime>201015153718593</response_datetime>
+    <list_provisioning />
+    <list_status />
+    <destination code="0" description="Request received">5531987654321</destination>
+  </provisioning>
+</tangram_response>
+
+-------------------------------------------------------------------------------
+20/10/2015 15:37:18 -0200
+
+Next, we simulate the client MO message 'Sim' to subscribe.
+Type [ENTER] to continue.
+```
+
+Next, the scripts calls cURL to simulate the user MO.
+
+```
+-------------------------------------------------------------------------------
+20/10/2015 15:44:30 -0200
+
+SIMULATE CLIENT MO...
+OK
+
+-------------------------------------------------------------------------------
+20/10/2015 15:44:31 -0200
+
+Now, wait the for notification.
+Check tangram-notification-listener.exe window or the log file generated by the application
+Type [ENTER] to continue.
+```
+
+The script presents the user a message to check the notification window. 
+TANGRAM is a asynchronous service, and **the user (and client applications) should evaluate the notifications received.**
+The script waits until the user hit ENTER to exit. 
 
 # References
 <a name="curlWiki">1</a>. [cURL](https://en.wikipedia.org/wiki/CURL). [↩](#curlWikiPos) 
