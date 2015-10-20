@@ -30,7 +30,7 @@ do
 	[[ $REPLY = *=* ]] || continue
 	[[ $REPLY != "#"* ]] || continue
 	props[${REPLY%%=*}]=${REPLY#*=}
-done < tangram.properties.txt
+done < tangram.properties
 
 # LARGE NUMBER PROVIDED BY TAKENET
 export TANGRAM_LA=$(echo "${props[TANGRAM.LA]}")
