@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tangram_request company_id="${company_id}" service_id="${service_id}">
+    <provisioning>
+        <channel_id>${channel_id}</channel_id>
+        <carrier_id>${carrier_id}</carrier_id>
+        <operation code="${operation_code}">${operation_desc}</operation>
+        <source>${tangram_la}</source>
+        <destination>${destination}</destination>
+        <request_datetime>${datetime}</request_datetime>
+        <authentication type="${auth_type}"/>
+        <notification type="${notification_type}" calltype="${notification_calltype}">${notification_site}</notification>
+    </provisioning>
+</tangram_request>
+

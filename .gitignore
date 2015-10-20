@@ -1,0 +1,14 @@
+# generated logs
+/log
+
+# vim files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# tangram template properties
+/template.properties
+

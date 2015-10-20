@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tangram_request company_id="1" service_id="1">
+    <provisioning>
+        <channel_id>2</channel_id>
+        <carrier_id>40</carrier_id>
+        <operation code="5">Subscribe channel</operation>
+        <source>9999</source>
+        <destination>553112345678</destination>
+        <request_datetime>2509151344</request_datetime>
+        <authentication type="0"/>
+        <notification type="208" calltype="1">http://ADDRESS:8080/services/tangram/notification</notification>
+    </provisioning>
+</tangram_request>
