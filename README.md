@@ -12,10 +12,10 @@ and prints the response. Using those scripts, you can see the raw requests and r
 ## Prerequisites 
 
 You can find the **base scripts** to send data to TANGRAM in the scripts folder for both Windows and Unix Bash:
->[tangram-flows-provisioning/scripts/unix/send_request.sh](https://github.com/takenet/tangram-flows-provisioning/blob/master/scripts/unix/send_request.sh)
+>[tangram-flows-provisioning/src/scripts/unix/send_request.sh](https://github.com/takenet/tangram-flows-provisioning/blob/master/src/scripts/unix/send_request.sh)
 >
->[tangram-flows-provisioning/scripts/windows/send_request.cmd
-](https://github.com/takenet/tangram-flows-provisioning/blob/master/scripts/windows/send_request.cmd)
+>[tangram-flows-provisioning/src/scripts/windows/send_request.cmd
+](https://github.com/takenet/tangram-flows-provisioning/blob/master/src/scripts/windows/send_request.cmd)
 
 **The flow examples, however, are all implemented using Shell script**. Therefore, to run those scripts on a Windows environment, you need to install MSYS. 
 
